@@ -1,8 +1,9 @@
 package com.zhuowenfeng.anycalc.doubles;
 
-import com.zhuowenfeng.applications.twosigma.calculator.Calculator;
-import com.zhuowenfeng.applications.twosigma.calculator.Operand;
-import com.zhuowenfeng.applications.twosigma.calculator.Operator;
+
+import com.zhuowenfeng.anycalc.Calculator;
+import com.zhuowenfeng.anycalc.Operand;
+import com.zhuowenfeng.anycalc.Operator;
 
 /**
  * @author Wenfeng Zhuo (wz2366@columbia.edu)

@@ -7,6 +7,6 @@ public interface OperatorFactory<T> {
 
   Operator<T> newOperator(String tokenString);
 
-  void register(String rep, Operator<T> instance);
+  void register(Operator<T> instance);
 
 }

@@ -14,7 +14,7 @@ public class DoubleDivideOperator implements Operator<Double> {
   @Override
   public Operand<Double> apply(List<Operand<Double>> operands) {
     assert operands.size() == 2;
-    return new Operand<>(operands.get(0).getValue() - operands.get(1).getValue());
+    return new Operand<>(operands.get(0).getValue() / operands.get(1).getValue());
   }
 
   @Override

@@ -15,8 +15,7 @@ public class StringOperatorFactory implements OperatorFactory<String> {
   private Map<String, Operator<String>> operatorMap = new HashMap<>();
 
   public StringOperatorFactory() {
-    StringAddOperator addOperator = new StringAddOperator();
-    operatorMap.put(addOperator.getRep(), addOperator);
+    register(new StringAddOperator());
   }
 
   @Override
@@ -25,8 +24,8 @@ public class StringOperatorFactory implements OperatorFactory<String> {
   }
 
   @Override
-  public void register(String rep, Operator<String> instance) {
-    operatorMap.put(rep, instance);
+  public void register(Operator<String> instance) {
+    operatorMap.put(instance.getRep(), instance);
   }
 
   private static final StringOperatorFactory _instance = new StringOperatorFactory();

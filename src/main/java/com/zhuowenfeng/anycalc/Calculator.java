@@ -12,7 +12,7 @@ public abstract class Calculator<T> {
 
   private static final String DELIMITER_PATTERN = "\\s";
 
-  public T eval(String expr) {
+  public Result<T> eval(String expr) {
     expr = preprocess(expr);
 
     Stack<Operand<T>> operands = new Stack<>();
@@ -31,12 +31,12 @@ public abstract class Calculator<T> {
       } else {
         Operator<T> operator = null;
         try {
-          operator = parseOperator(tokenString);
+          operator = tryParseOperator(tokenString);
         } catch (Exception e) {
           // throw exception next
         }
         if (operator == null) {
-         throw new RuntimeException("Invalid token in the expression: " + tokenString);
+         return new Result<>(false, null, "Invalid token in the expression: " + tokenString);
         }
         if (isLeftParenthesis(operator.getRep())) {
           operators.push(operator);
@@ -57,9 +57,9 @@ public abstract class Calculator<T> {
       calc(operands, operators);
     }
     if (operands.size() != 1) {
-      throw new RuntimeException("Invalid expression, missing operators");
+      return new Result<>(false, null, "Invalid expression, missing operators");
     }
-    return operands.pop().getValue();
+    return new Result<>(true, operands.pop().getValue(), null);
   }
 
   private void calc(Stack<Operand<T>> operands, Stack<Operator<T>> operators) {
@@ -80,6 +80,13 @@ public abstract class Calculator<T> {
     return expr;
   }
 
+  protected Operator<T> tryParseOperator(String tokenString) {
+    if ("(".equals(tokenString) || ")".equals(tokenString)) {
+      return new ParenthesisOperator(tokenString);
+    }
+    return parseOperator(tokenString);
+  }
+
   private boolean isLeftParenthesis(String rep) {
     return "(".equals(rep);
   }
@@ -91,5 +98,34 @@ public abstract class Calculator<T> {
   protected abstract Operand<T> parseOperand(String tokenString);
 
   protected abstract Operator<T> parseOperator(String tokenString);
+
+  private class ParenthesisOperator implements Operator<T> {
+
+    private String rep;
+
+    public ParenthesisOperator(String rep) {
+      this.rep = rep;
+    }
+
+    @Override
+    public Operand<T> apply(List<Operand<T>> operands) {
+      return null;
+    }
+
+    @Override
+    public int priority() {
+      return 0;
+    }
+
+    @Override
+    public int numOfOperands() {
+      return 0;
+    }
+
+    @Override
+    public String getRep() {
+      return this.rep;
+    }
+  }
 
 }

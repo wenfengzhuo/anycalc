@@ -15,10 +15,11 @@ public class DoubleOperatorFactory implements OperatorFactory<Double> {
   private final Map<String, Operator<Double>> operatorMap = new HashMap<>();
 
   private DoubleOperatorFactory() {
-    DoubleAddOperator addOperator = new DoubleAddOperator();
-    operatorMap.put(addOperator.getRep(), addOperator);
-    DoubleIncOperator incOperator = new DoubleIncOperator();
-    operatorMap.put(incOperator.getRep(), incOperator);
+    register(new DoubleAddOperator());
+    register(new DoubleMinusOperator());
+    register(new DoubleMultiplyOperator());
+    register(new DoubleDivideOperator());
+    register(new DoubleIncOperator());
   }
 
   @Override
@@ -27,8 +28,8 @@ public class DoubleOperatorFactory implements OperatorFactory<Double> {
   }
 
   @Override
-  public void register(String rep, Operator<Double> instance) {
-    operatorMap.put(rep, instance);
+  public void register(Operator<Double> instance) {
+    operatorMap.put(instance.getRep(), instance);
   }
 
 
