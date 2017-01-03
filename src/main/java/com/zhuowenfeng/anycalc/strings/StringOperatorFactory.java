@@ -16,6 +16,8 @@ public class StringOperatorFactory implements OperatorFactory<String> {
 
   public StringOperatorFactory() {
     register(new StringAddOperator());
+    register(new StringMinusOperator());
+    register(new StringMultiplyOperator());
   }
 
   @Override
