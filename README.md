@@ -1,6 +1,9 @@
 # anycalc
 An extensible calculator that could make everything calculable.
 
+### Usage
+Please refer to [Anycalc](https://wenfengzhuo.github.io/2017/01/04/Anycalc/)
+
 ### Number calculator
 Current support operators:
 - "+", "-", "*", "/"
